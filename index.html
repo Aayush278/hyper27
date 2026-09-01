@@ -1,0 +1,1792 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HYPERUNIVERSITY — Learn. Build. Grow.</title>
+
+    <!-- Fonts: Private Digital Estate Aesthetic -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600&family=Libre+Caslon+Text:wght@400;700&family=Anton&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+
+    <style>
+        :root {
+            /* Private Digital Estate Aesthetic */
+            --brand: #f2ca50;
+            /* Primary Gold */
+            --brand-light: #ffe088;
+            --brand-dark: #b8972e;
+
+            --cyan: #d4af37;
+            /* Primary Container / Deep Gold */
+
+            /* Backgrounds (Dark Greys) */
+            --bg: #131313;
+            --surface-0: #0e0e0e;
+            --surface-100: #1c1b1b;
+            --surface-200: #201f1f;
+            --surface-300: #2a2a2a;
+            --surface-400: #d0c5af;
+            /* Tan/muted text */
+            --surface-500: #bdcac1;
+
+            --white: #e5e2e1;
+
+            /* Sharper Radii for Brutalist/Premium Feel */
+            --radius-sm: 4px;
+            --radius-md: 6px;
+            --radius-lg: 8px;
+            --radius-xl: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hanken Grotesk', sans-serif;
+            background-color: var(--bg);
+            color: var(--white);
+            line-height: 1.5;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Typography */
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Libre Caslon Text', serif;
+            letter-spacing: -0.01em;
+            font-weight: 400;
+        }
+
+        .label,
+        .btn,
+        .island-link,
+        .preloader-sub,
+        .price-card .featured-tag,
+        .island-brand {
+            font-family: 'Hanken Grotesk', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 600;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        /* Utilities */
+        .text-grad {
+            background: linear-gradient(135deg, var(--white), var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .sep {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            margin: 40px 0;
+        }
+
+        /* Hero Redesign Styles */
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 64px;
+            align-items: center;
+        }
+
+        @media (min-width: 992px) {
+            .hero-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+            }
+        }
+
+        .font-serif {
+            font-family: 'Libre Caslon Text', serif;
+            font-weight: 400;
+        }
+
+        .btn-gold {
+            background: transparent;
+            color: var(--brand);
+            border: 1px solid var(--brand);
+            padding: 16px 32px;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-gold:hover {
+            background: linear-gradient(135deg, var(--bg), var(--surface-300));
+            border-color: var(--brand-light);
+            color: var(--brand-light);
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal.s1 {
+            transition-delay: 0.1s;
+        }
+
+        .reveal.s2 {
+            transition-delay: 0.2s;
+        }
+
+        .reveal.s3 {
+            transition-delay: 0.3s;
+        }
+
+        .reveal.s4 {
+            transition-delay: 0.4s;
+        }
+
+        .reveal.s5 {
+            transition-delay: 0.5s;
+        }
+
+        /* Buttons (Thicker borders) */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            border-radius: var(--radius-md);
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background: var(--brand);
+            color: var(--bg);
+            box-shadow: 0 10px 30px rgba(242, 202, 80, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(242, 202, 80, 0.4);
+            border-color: var(--white);
+        }
+
+        .btn-ghost {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--white);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--cyan);
+            color: var(--cyan);
+        }
+
+        .anim-grad {
+            background-size: 200% 200%;
+            animation: gradientMove 4s ease infinite;
+        }
+
+        @keyframes gradientMove {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Labels */
+        .label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 99px;
+            font-size: 12px;
+            color: var(--surface-400);
+        }
+
+        .label-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--cyan);
+            box-shadow: 0 0 10px var(--cyan);
+        }
+
+        /* Cards (Glass + Brutalist Border) */
+        .card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 2px solid rgba(255, 255, 255, 0.08);
+            /* Thicker border */
+            border-radius: var(--radius-xl);
+            padding: 32px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            border-color: var(--cyan);
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.04);
+            box-shadow: 0 10px 40px rgba(232, 255, 0, 0.05);
+            /* subtle yellow glow */
+        }
+
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .grid-5 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .grid-3 {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .grid-4 {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 24px;
+            }
+
+            .grid-5 {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .grid-5 {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+
+        .masonry-grid {
+            column-count: 1;
+            column-gap: 24px;
+        }
+        @media (min-width: 768px) {
+            .masonry-grid { column-count: 2; }
+        }
+        @media (min-width: 1024px) {
+            .masonry-grid { column-count: 4; }
+        }
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 24px;
+        }
+
+        /* Dynamic Island */
+        .island {
+            position: fixed;
+            top: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(20, 19, 19, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 99px;
+            padding: 8px 8px 8px 24px;
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            z-index: 100;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            width: max-content;
+            max-width: 90vw;
+        }
+
+        .island.scrolled {
+            background: rgba(20, 19, 19, 0.9);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            padding: 6px 6px 6px 20px;
+        }
+
+        .island-brand {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: 0.1em;
+        }
+
+        .island-links {
+            display: none;
+            align-items: center;
+            gap: 24px;
+        }
+
+        @media (min-width: 768px) {
+            .island-links {
+                display: flex;
+            }
+        }
+
+        .island-link {
+            font-size: 13px;
+            color: var(--surface-400);
+            transition: color 0.2s ease;
+        }
+
+        .island-link:hover {
+            color: var(--cyan);
+        }
+
+        .island-cta {
+            background: var(--white);
+            color: var(--bg);
+            padding: 10px 24px;
+            border-radius: 99px;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .island-cta:hover {
+            background: var(--cyan);
+            transform: scale(1.05);
+        }
+
+        .island-burger {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        @media (min-width: 768px) {
+            .island-burger {
+                display: none;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .island {
+                width: 90vw;
+                justify-content: space-between;
+                padding: 12px 16px 12px 24px;
+                gap: 16px;
+            }
+
+            .island-cta {
+                display: none;
+            }
+
+            .island-brand {
+                font-size: 14px;
+            }
+        }
+
+        /* Mobile Panel */
+        .mobile-panel {
+            position: fixed;
+            top: 80px;
+            left: 24px;
+            right: 24px;
+            background: rgba(20, 19, 19, 0.95);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-xl);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            z-index: 99;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .mobile-panel.open {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        .mobile-link {
+            font-family: 'Space Mono', monospace;
+            font-size: 16px;
+            color: var(--white);
+            padding: 12px;
+            border-radius: var(--radius-md);
+            background: rgba(255, 255, 255, 0.02);
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .mobile-cta {
+            font-family: 'Space Mono', monospace;
+            background: var(--brand);
+            color: #fff;
+            padding: 16px;
+            border-radius: var(--radius-md);
+            text-align: center;
+            font-weight: 700;
+            margin-top: 8px;
+            text-transform: uppercase;
+        }
+
+        /* Preloader */
+        #preloader {
+            position: fixed;
+            inset: 0;
+            background: var(--bg);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.8s ease;
+        }
+
+        #preloader.hide {
+            transform: translateY(-100%);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .preloader-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .preloader-brand {
+            font-family: 'Anton', sans-serif;
+            font-size: clamp(40px, 10vw, 80px);
+            letter-spacing: 0.05em;
+            display: flex;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .preloader-brand span {
+            display: inline-block;
+            transform: translateY(100%);
+            opacity: 0;
+            animation: textRise 0.6s cubic-bezier(0.2, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes textRise {
+            0% {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .preloader-progress {
+            width: 300px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .preloader-progress-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--brand), var(--cyan));
+            border-radius: 4px;
+            box-shadow: 0 0 20px var(--cyan);
+            animation: progressFill 2.2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+        }
+
+        @keyframes progressFill {
+            0% {
+                width: 0%;
+            }
+
+            40% {
+                width: 40%;
+            }
+
+            70% {
+                width: 80%;
+            }
+
+            100% {
+                width: 100%;
+            }
+        }
+
+        .preloader-counter {
+            font-family: 'Space Mono', monospace;
+            font-size: 16px;
+            color: var(--cyan);
+            font-weight: 700;
+        }
+
+        /* Personality Dev section */
+        .pd-card {
+            background: linear-gradient(135deg, rgba(27, 59, 255, 0.06), rgba(232, 255, 0, 0.03));
+            border: 2px solid rgba(27, 59, 255, 0.3);
+            border-radius: var(--radius-xl);
+            padding: 36px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media (min-width: 768px) {
+            .pd-card {
+                padding: 56px;
+            }
+        }
+
+        /* Pricing card */
+        .price-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 2px solid rgba(255, 255, 255, 0.08);
+            border-radius: var(--radius-xl);
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .price-card.featured {
+            background: rgba(27, 59, 255, 0.04);
+            border-color: var(--cyan);
+            box-shadow: 0 0 40px rgba(232, 255, 0, 0.05);
+            position: relative;
+        }
+
+        .sec-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .sec-header h2 {
+            font-size: clamp(36px, 6vw, 56px);
+            margin: 16px 0;
+        }
+
+        .sec-header p {
+            color: var(--surface-400);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Payment Modal */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(13, 13, 13, 0.8);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .payment-modal {
+            background: var(--surface-100);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-xl);
+            padding: 40px;
+            width: 90%;
+            max-width: 500px;
+            transform: scale(0.95) translateY(20px);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+        }
+
+        .modal-overlay.open .payment-modal,
+        .modal-overlay.open .plan-modal {
+            transform: scale(1) translateY(0);
+        }
+
+        .plan-modal {
+            background: var(--surface-100);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-xl);
+            padding: 40px;
+            width: 90%;
+            max-width: 800px;
+            transform: scale(0.95) translateY(20px);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .location-pill {
+            display: inline-block;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 8px 20px;
+            font-size: 14px;
+            color: var(--surface-400);
+            background: rgba(255, 255, 255, 0.02);
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .location-pill:hover {
+            border-color: #d4af37;
+            color: #d4af37;
+            background: rgba(212, 175, 55, 0.05);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: none;
+            color: var(--surface-400);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+        }
+
+        .pay-option {
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px solid rgba(255, 255, 255, 0.08);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 16px;
+        }
+
+        .pay-option:hover {
+            border-color: var(--cyan);
+            background: rgba(232, 255, 0, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .pay-option:last-child {
+            margin-bottom: 0;
+        }
+
+        .pay-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--cyan);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <div class="preloader-brand" id="preloader-text"></div>
+            <div class="preloader-progress">
+                <div class="preloader-progress-bar"></div>
+            </div>
+            <div class="preloader-counter" id="preloader-counter">0%</div>
+        </div>
+    </div>
+
+    <!-- Background Grid -->
+    <div style="position:fixed;inset:0;z-index:-1;pointer-events:none;">
+        <div
+            style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);background-size:72px 72px;">
+        </div>
+        <div
+            style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 0%,var(--surface-0) 100%);">
+        </div>
+    </div>
+
+    <!-- Dynamic Island -->
+    <nav class="island" id="island-nav">
+        <span class="island-brand">HYPER<span style="color:var(--brand)">UNIVERSITY</span></span>
+        <div class="island-links">
+            <a class="island-link" href="#pillars">How It Works</a>
+            <a class="island-link" href="#skills">Skills</a>
+            <a class="island-link" href="#community">Community</a>
+            <a class="island-link" href="#pricing">Membership</a>
+        </div>
+        <a class="island-cta" href="#" onclick="openPlanModal(event)">Join →</a>
+        <button class="island-burger" id="burger-btn" aria-label="Menu">
+            <span class="material-symbols-outlined mi" style="font-size:20px;">menu</span>
+        </button>
+    </nav>
+
+    <!-- Mobile panel -->
+    <div class="mobile-panel" id="mobile-panel">
+        <a class="mobile-link" href="#pillars">How It Works</a>
+        <a class="mobile-link" href="#skills">Skills</a>
+        <a class="mobile-link" href="#community">Community</a>
+        <a class="mobile-link" href="#pricing">Membership</a>
+        <a class="mobile-link" href="#faq">FAQ</a>
+        <a class="mobile-cta" href="#"
+            onclick="document.getElementById('burger-btn').click(); setTimeout(() => openPlanModal(event), 300);">Join
+            HyperUniversity →</a>
+    </div>
+
+    <main>
+        <!-- Hero -->
+        <section class="section reveal" id="hero"
+            style="min-height:100svh;display:flex;align-items:center;padding-top:100px;">
+            <div class="container">
+                <!-- Hero glow -->
+                <div
+                    style="position:absolute;top:30%;left:50%;transform:translateX(-50%);width:min(600px,100vw);height:min(600px,100vw);border-radius:50%;background:radial-gradient(circle,rgba(212, 175, 55, 0.08),transparent 60%);pointer-events:none;">
+                </div>
+
+                <div class="hero-grid" style="position:relative;z-index:1;">
+                    <!-- Left: Content -->
+                    <div style="max-width: 600px; margin: 0 auto;">
+                        <div class="label"
+                            style="margin-bottom:28px; border-color: transparent; padding: 0; color: var(--cyan);">
+                            MEMBERS CLUB
+                        </div>
+
+                        <h1 class="font-serif"
+                            style="font-size:clamp(40px, 6vw, 64px);line-height:1.15; color: var(--white); text-transform: none; margin-bottom: 24px;">
+                            An Exclusive Network for the Modern Builder
+                        </h1>
+
+                        <p
+                            style="font-size:clamp(15px,2.5vw,18px);color:var(--surface-400);margin-bottom: 40px; font-family: 'Inter', sans-serif;">
+                            An elite global network of ambitious, high-calibre students. Real-world skills, meaningful
+                            connections, lasting growth.
+                        </p>
+
+                        <div>
+                            <a class="btn-gold" href="#" onclick="openPlanModal(event)">EXPLORE MEMBERSHIP</a>
+                        </div>
+
+                        <div
+                            style="margin-top:24px; font-size:12px; color:var(--surface-500); display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+                            <div style="display:flex; align-items:center;">
+                                <img src="https://i.pravatar.cc/100?img=11" alt="Student"
+                                    style="width:24px; height:24px; border-radius:50%; border:2px solid var(--bg); z-index:3; margin-right:-10px;">
+                                <img src="https://i.pravatar.cc/100?img=12" alt="Student"
+                                    style="width:24px; height:24px; border-radius:50%; border:2px solid var(--bg); z-index:2; margin-right:-10px;">
+                                <img src="https://i.pravatar.cc/100?img=13" alt="Student"
+                                    style="width:24px; height:24px; border-radius:50%; border:2px solid var(--bg); z-index:1;">
+                            </div>
+                            <span
+                                style="font-family:'Space Mono',monospace; letter-spacing:0.05em; text-transform:uppercase;">Since
+                                one year and over 500 students worldwide</span>
+                        </div>
+                    </div>
+
+                    <!-- Right: Video -->
+                    <div>
+                        <div id="video-wrapper"
+                            style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: var(--radius-lg); border: 1px solid var(--cyan); background: rgba(255, 255, 255, 0.02); box-shadow: 0 20px 40px rgba(0,0,0,0.5); transition: border-color 0.4s ease;"
+                            onmouseover="this.style.borderColor='#fff'"
+                            onmouseout="this.style.borderColor='var(--cyan)'">
+                            <iframe src="https://www.youtube.com/embed/0ns_kDN3sFw?si=z7O9LJVySLSdHguP"
+                                title="Orientation Video" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen
+                                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: calc(var(--radius-lg) - 1px); z-index: 1;"></iframe>
+
+                            <!-- Video Preloader -->
+                            <div id="video-preloader"
+                                style="position: absolute; inset: 0; z-index: 10; background: rgba(5, 8, 6, 0.9); backdrop-filter: blur(8px); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px; transition: opacity 0.8s ease, visibility 0.8s ease;">
+                                <h3
+                                    style="font-family: 'Space Mono', monospace; font-size: clamp(14px, 3vw, 20px); text-align: center; text-transform: uppercase; color: var(--cyan); letter-spacing: 0.05em; max-width: 80%; line-height: 1.4;">
+                                    Watch this video fully<br><span style="color: var(--white); font-size: 0.8em;">it
+                                        might change your fate</span></h3>
+                                <div
+                                    style="width: 200px; height: 3px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; position: relative;">
+                                    <div id="video-progress"
+                                        style="position: absolute; top: 0; left: 0; height: 100%; width: 0%; background: var(--cyan); border-radius: 4px; box-shadow: 0 0 10px var(--cyan); transition: width 0.1s linear;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="text-align: center; margin-top: 16px;">
+                            <span
+                                style="font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.1em; color: var(--surface-400); text-transform: uppercase;">Watch
+                                the orientation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="sep"></div>
+
+        <!-- 5 Pillars -->
+        <section class="section reveal" id="pillars">
+            <div class="container">
+                <div class="sec-header">
+                    <div class="label"><span class="label-dot"></span> The Framework</div>
+                    <h2>How It <span class="text-grad">Works</span></h2>
+                    <p>From consuming information to creating real opportunities.</p>
+                </div>
+
+                <div class="grid-5">
+                    <div class="card reveal s1" style="text-align:center;">
+                        <span class="material-symbols-outlined mi"
+                            style="font-size:32px;color:var(--brand);margin-bottom:16px;">school</span>
+                        <h4 style="font-size:20px;margin-bottom:8px;">LEARN</h4>
+                        <p style="font-size:14px;color:var(--surface-400);">Structured curriculum, live classes, and
+                            recordings.</p>
+                    </div>
+                    <div class="card reveal s2" style="text-align:center;">
+                        <span class="material-symbols-outlined mi"
+                            style="font-size:32px;color:var(--cyan);margin-bottom:16px;">construction</span>
+                        <h4 style="font-size:20px;margin-bottom:8px;">BUILD</h4>
+                        <p style="font-size:14px;color:var(--surface-400);">Practice, personal projects, and client
+                            work.</p>
+                    </div>
+                    <div class="card reveal s3" style="text-align:center;">
+                        <span class="material-symbols-outlined mi"
+                            style="font-size:32px;color:var(--brand-light);margin-bottom:16px;">psychology</span>
+                        <h4 style="font-size:20px;margin-bottom:8px;">GROW</h4>
+                        <p style="font-size:14px;color:var(--surface-400);">Personality development, feedback, and
+                            growth.</p>
+                    </div>
+                    <div class="card reveal s4" style="text-align:center;">
+                        <span class="material-symbols-outlined mi"
+                            style="font-size:32px;color:#fbbf24;margin-bottom:16px;">groups</span>
+                        <h4 style="font-size:20px;margin-bottom:8px;">CONNECT</h4>
+                        <p style="font-size:14px;color:var(--surface-400);">Community, mentorship, and collaboration.
+                        </p>
+                    </div>
+                    <div class="card reveal s5" style="text-align:center;">
+                        <span class="material-symbols-outlined mi"
+                            style="font-size:32px;color:#34d399;margin-bottom:16px;">rocket_launch</span>
+                        <h4 style="font-size:20px;margin-bottom:8px;">APPLY</h4>
+                        <p style="font-size:14px;color:var(--surface-400);">Freelancing, jobs, internships, and
+                            business.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="sep"></div>
+
+        <!-- Skills -->
+        <section class="section reveal" id="skills">
+            <div class="container">
+                <div class="sec-header">
+                    <div class="label"><span class="label-dot"></span> Skill Tracks</div>
+                    <h2>High-Income <span class="text-grad">Skills</span></h2>
+                    <p>Master the practical skills that the market actually pays for.</p>
+                </div>
+
+                <div class="grid-2" style="max-width:900px;margin:0 auto 40px;">
+                    <div class="card reveal s1">
+                        <span class="material-symbols-outlined mi"
+                            style="font-size:28px;color:var(--brand);margin-bottom:16px;display:block;">code</span>
+                        <h4 style="font-size:24px;margin-bottom:8px;">Web Development</h4>
+                        <p style="font-size:15px;color:var(--surface-400);">Frontend design, responsive sites, UI
+                            implementation, and interactive apps. Build your portfolio.</p>
+                    </div>
+                    <div class="card reveal s2">
+                        <span class="material-symbols-outlined mi"
+                            style="font-size:28px;color:var(--cyan);margin-bottom:16px;display:block;">campaign</span>
+                        <h4 style="font-size:24px;margin-bottom:8px;">Digital Marketing</h4>
+                        <p style="font-size:15px;color:var(--surface-400);">Content strategy, audience building,
+                            campaigns, and brand growth. Real projects for real clients.</p>
+                    </div>
+                    <div class="card reveal s3">
+                        <span class="material-symbols-outlined mi"
+                            style="font-size:28px;color:#fbbf24;margin-bottom:16px;display:block;">show_chart</span>
+                        <h4 style="font-size:24px;margin-bottom:8px;">Trading</h4>
+                        <p style="font-size:15px;color:var(--surface-400);">Market fundamentals, technical analysis,
+                            risk management, psychology, and backtesting.</p>
+                    </div>
+                    <div class="card reveal s4">
+                        <span class="material-symbols-outlined mi"
+                            style="font-size:28px;color:var(--brand-light);margin-bottom:16px;display:block;">movie_edit</span>
+                        <h4 style="font-size:24px;margin-bottom:8px;">Video Editing</h4>
+                        <p style="font-size:15px;color:var(--surface-400);">Short & long-form, storytelling, pacing,
+                            transitions, and audio for modern platforms.</p>
+                    </div>
+                </div>
+
+                <!-- Personality Development -->
+                <div class="pd-card reveal s5" style="max-width:900px;margin:0 auto;">
+                    <div style="display:flex;flex-direction:column;gap:24px;">
+                        <div class="label"><span class="label-dot"></span> Core Track</div>
+                        <h3 style="font-size:clamp(28px, 5vw, 40px);line-height:1.1;">Personality Development</h3>
+                        <p style="font-size:16px;color:var(--surface-500);max-width:600px;">
+                            Technical ability is useful, but being unable to communicate, think clearly, or navigate
+                            life makes it considerably less useful. This dedicated track develops the whole person.
+                        </p>
+                        <div style="display:flex;flex-wrap:wrap;gap:16px;margin-top:16px;">
+                            <span class="label">Life & Goals</span>
+                            <span class="label">Money & Finance</span>
+                            <span class="label">Society</span>
+                            <span class="label">Relationships</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="sep"></div>
+
+        <!-- Testimonials -->
+        <section class="section reveal" id="testimonials">
+            <div class="container">
+                <div class="sec-header">
+                    <div class="label"><span class="label-dot"></span> Wall of Love</div>
+                    <h2>Student <span class="text-grad">Success</span></h2>
+                    <p>Real results from builders who took action.</p>
+                </div>
+
+                <div class="masonry-grid" style="margin-bottom: 40px;">
+                    <!-- Review 1 -->
+                    <div class="card masonry-item reveal s1">
+                        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+                            <div>
+                                <h4 style="font-size:16px;font-family:'Inter',sans-serif;text-transform:none;margin:0;">Maharaj Singh</h4>
+                                <div style="font-size:12px;color:var(--surface-400);">Member</div>
+                            </div>
+                        </div>
+                        <p style="font-size:14px;color:var(--surface-500);font-style:italic;">
+                            "Mainly, I like Aditya bhai's meetings and the support from mentors. It changed half of my beliefs and mindset... Other things like screen time and goals didn't impact me as much, but yeah, there's a little bit of improvement. 4 out of 5 star rating..."
+                        </p>
+                    </div>
+
+                    <!-- Review 2 -->
+                    <div class="card masonry-item reveal s2">
+                        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+                            <div>
+                                <h4 style="font-size:16px;font-family:'Inter',sans-serif;text-transform:none;margin:0;">Krishna Raut</h4>
+                                <div style="font-size:12px;color:var(--surface-400);">Member</div>
+                            </div>
+                        </div>
+                        <p style="font-size:14px;color:var(--surface-500);font-style:italic;">
+                            "I like Hyper University because of Aditya bhai's support. All the mentors are very helpful, and we get to learn a lot from Aditya bhai's meetings. Screen time, goals, and other things are normal. 🙂 8/10"
+                        </p>
+                    </div>
+
+                    <!-- Review 3 -->
+                    <div class="card masonry-item reveal s3">
+                        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+                            <div>
+                                <h4 style="font-size:16px;font-family:'Inter',sans-serif;text-transform:none;margin:0;">Aviral Singh</h4>
+                                <div style="font-size:12px;color:var(--surface-400);">Member</div>
+                            </div>
+                        </div>
+                        <p style="font-size:14px;color:var(--surface-500);font-style:italic;">
+                            "Hello, my name is Aviral Singh. This Hyper University group is very good, and everyone is very humble. Aditya bhai is a good person. I've been learning here for a month, and I can explain it in one line: hard work, no excuses."
+                        </p>
+                    </div>
+
+                    <!-- Review 4 -->
+                    <div class="card masonry-item reveal s4">
+                        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+                            <div>
+                                <h4 style="font-size:16px;font-family:'Inter',sans-serif;text-transform:none;margin:0;">Nash renew</h4>
+                                <div style="font-size:12px;color:var(--surface-400);">Member</div>
+                            </div>
+                        </div>
+                        <p style="font-size:14px;color:var(--surface-500);font-style:italic;">
+                            "Bhai, sab best hai. Community ke members dedicated hain, lekin sabse interesting Aditya bhai ki meeting hai jisme itni premium value provide karte hain... Great! 💯"
+                        </p>
+                    </div>
+
+                    <!-- Review 5 -->
+                    <div class="card masonry-item reveal s5">
+                        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+                            <div>
+                                <h4 style="font-size:16px;font-family:'Inter',sans-serif;text-transform:none;margin:0;">Yogya Budhraja</h4>
+                                <div style="font-size:12px;color:var(--surface-400);">Member</div>
+                            </div>
+                        </div>
+                        <p style="font-size:14px;color:var(--surface-500);font-style:italic;">
+                            "Hyper University is really a life-changing environment! I have been in the club for 3 months and I don't regret it at all... Aditya bhai changed my mindset and beliefs about everything. Thank you!"
+                        </p>
+                    </div>
+
+                    <!-- Review 6 -->
+                    <div class="card masonry-item reveal s1">
+                        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+                            <div>
+                                <h4 style="font-size:16px;font-family:'Inter',sans-serif;text-transform:none;margin:0;">Piyush Ahir</h4>
+                                <div style="font-size:12px;color:var(--surface-400);">Member</div>
+                            </div>
+                        </div>
+                        <p style="font-size:14px;color:var(--surface-500);font-style:italic;">
+                            "Maine Hyper University join kiya tha, aur honestly ye meri life ke best decisions me se ek tha! Yahan mujhe growth mindset, motivation aur self-improvement mila..."
+                        </p>
+                    </div>
+
+                    <!-- Review 7 -->
+                    <div class="card masonry-item reveal s2">
+                        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+                            <div>
+                                <h4 style="font-size:16px;font-family:'Inter',sans-serif;text-transform:none;margin:0;">Rajnish</h4>
+                                <div style="font-size:12px;color:var(--surface-400);">Member</div>
+                            </div>
+                        </div>
+                        <p style="font-size:14px;color:var(--surface-500);font-style:italic;">
+                            "Hi, I'm Rajnish. Mere liye ye community best ever hai. Mujhe bahut kuch sikhane ko mila iss community me, mere bahut se confusions dur huye, aur ek right path par chalne ka mauka mila..."
+                        </p>
+                    </div>
+
+                    <!-- Review 8 -->
+                    <div class="card masonry-item reveal s3">
+                        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+                            <div>
+                                <h4 style="font-size:16px;font-family:'Inter',sans-serif;text-transform:none;margin:0;">Sk Ali</h4>
+                                <div style="font-size:12px;color:var(--surface-400);">Member</div>
+                            </div>
+                        </div>
+                        <p style="font-size:14px;color:var(--surface-500);font-style:italic;">
+                            "I think Hyper University me join hona meri life ka best decision tha because Hyper University ne mera pura mindset change kar diya. Main pehle apni life ko leke bahut confused aur lost tha, bad habits se pareshan tha, aur bhi bahut sari problems thi mujhme, lekin Hyper University me join hone ke baad sab badal gaya..."
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="sep"></div>
+
+        <!-- Member Locations -->
+        <section class="section reveal" id="locations">
+            <div class="container">
+                <div class="sec-header" style="text-align: center;">
+                    <div class="label" style="border-color: #d4af37; color: #d4af37; margin: 0 auto 24px;"><span
+                            class="label-dot" style="background: #d4af37; box-shadow: 0 0 10px #d4af37;"></span> Member
+                        Locations</div>
+                    <h2>Where our members <span style="color: var(--white);">are.</span></h2>
+                    <p style="margin: 24px auto 0;">Inside the community, you can see where other students are based and
+                        connect directly with members near you.</p>
+                </div>
+
+                <div
+                    style="background: var(--surface-100); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: var(--radius-xl); padding: 50px; margin-top: 50px;">
+                    <div class="grid-3" style="gap: 40px;">
+                        <!-- South Asia -->
+                        <div>
+                            <h4
+                                style="font-family: 'Space Mono', monospace; font-size: 13px; color: #d4af37; margin-bottom: 24px; text-transform: uppercase; letter-spacing: 0.1em;">
+                                South Asia</h4>
+                            <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+                                <span class="location-pill">India</span>
+                                <span class="location-pill">Pakistan</span>
+                                <span class="location-pill">Nepal</span>
+                            </div>
+                        </div>
+
+                        <!-- Middle East -->
+                        <div>
+                            <h4
+                                style="font-family: 'Space Mono', monospace; font-size: 13px; color: #d4af37; margin-bottom: 24px; text-transform: uppercase; letter-spacing: 0.1em;">
+                                Middle East</h4>
+                            <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+                                <span class="location-pill">UAE</span>
+                            </div>
+                        </div>
+
+                        <!-- Oceania -->
+                        <div>
+                            <h4
+                                style="font-family: 'Space Mono', monospace; font-size: 13px; color: #d4af37; margin-bottom: 24px; text-transform: uppercase; letter-spacing: 0.1em;">
+                                Oceania</h4>
+                            <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+                                <span class="location-pill">Australia</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="sep"></div>
+
+        <!-- Pricing -->
+        <section class="section reveal" id="pricing">
+            <div class="container">
+                <div class="sec-header">
+                    <div class="label"><span class="label-dot"></span> Monthly Subscription</div>
+                    <h2>Access <span class="text-grad">Tiers</span></h2>
+                    <p>No confusing tiers. Just choose your monthly subscription plan.</p>
+                </div>
+
+                <div class="pricing-grid">
+                    <!-- Standard -->
+                    <div class="price-card reveal s1">
+                        <h3 style="font-size:28px;margin-bottom:8px;">Standard</h3>
+                        <div style="margin-bottom:24px;">
+                            <span style="font-family:'Anton',sans-serif;font-size:48px;color:var(--white);">₹349</span>
+                            <span style="font-size:16px;color:var(--surface-400);">/month</span>
+                        </div>
+                        <p style="font-size:15px;color:var(--surface-400);margin-bottom:32px;">Perfect for mastering a
+                            single focus area.</p>
+                        <ul
+                            style="list-style:none;flex:1;margin-bottom:32px;display:flex;flex-direction:column;gap:12px;">
+                            <li style="display:flex;align-items:center;gap:10px;"><span
+                                    class="material-symbols-outlined mi"
+                                    style="color:var(--cyan);font-size:20px;">check</span><strong>1 technical
+                                    skill</strong></li>
+                            <li style="display:flex;align-items:center;gap:10px;"><span
+                                    class="material-symbols-outlined mi"
+                                    style="color:var(--cyan);font-size:20px;">check</span><strong>Personality
+                                    Dev</strong></li>
+                            <li style="display:flex;align-items:center;gap:10px;color:var(--surface-400);"><span
+                                    class="material-symbols-outlined mi"
+                                    style="color:var(--surface-400);font-size:20px;">check</span>Live & Recorded Classes
+                            </li>
+                            <li style="display:flex;align-items:center;gap:10px;color:var(--surface-400);"><span
+                                    class="material-symbols-outlined mi"
+                                    style="color:var(--surface-400);font-size:20px;">check</span>Full Community Access
+                            </li>
+                        </ul>
+                        <a class="btn btn-ghost" href="#" onclick="openPaymentModal(event)" style="width:100%;">Select
+                            Standard</a>
+                    </div>
+
+                    <!-- Premium -->
+                    <div class="price-card featured reveal s2">
+                        <div class="label featured-tag"
+                            style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--cyan);color:var(--bg);border:none;font-weight:700;">
+                            Recommended</div>
+                        <h3 style="font-size:28px;margin-bottom:8px;">Premium</h3>
+                        <div style="margin-bottom:24px;">
+                            <span style="font-family:'Anton',sans-serif;font-size:48px;color:var(--white);">₹499</span>
+                            <span style="font-size:16px;color:var(--surface-400);">/month</span>
+                        </div>
+                        <p style="font-size:15px;color:var(--surface-400);margin-bottom:32px;">For multi-disciplinary
+                            builders wanting maximum opportunity.</p>
+                        <ul
+                            style="list-style:none;flex:1;margin-bottom:32px;display:flex;flex-direction:column;gap:12px;">
+                            <li style="display:flex;align-items:center;gap:10px;"><span
+                                    class="material-symbols-outlined mi"
+                                    style="color:var(--cyan);font-size:20px;">check</span><strong>2 technical
+                                    skills</strong></li>
+                            <li style="display:flex;align-items:center;gap:10px;"><span
+                                    class="material-symbols-outlined mi"
+                                    style="color:var(--cyan);font-size:20px;">check</span><strong>Personality
+                                    Dev</strong></li>
+                            <li style="display:flex;align-items:center;gap:10px;color:var(--surface-400);"><span
+                                    class="material-symbols-outlined mi"
+                                    style="color:var(--surface-400);font-size:20px;">check</span>Live & Recorded Classes
+                            </li>
+                            <li style="display:flex;align-items:center;gap:10px;color:var(--surface-400);"><span
+                                    class="material-symbols-outlined mi"
+                                    style="color:var(--surface-400);font-size:20px;">check</span>Full Community Access
+                            </li>
+                            <li style="display:flex;align-items:center;gap:10px;color:var(--surface-400);"><span
+                                    class="material-symbols-outlined mi"
+                                    style="color:var(--surface-400);font-size:20px;">check</span>Mentorship & Networking
+                            </li>
+                        </ul>
+                        <a class="btn btn-primary anim-grad" href="#" onclick="openPaymentModal(event)"
+                            style="width:100%;">Select Premium</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="section reveal" style="padding:120px 0; text-align:center;">
+            <div class="container">
+                <h2 style="font-size:clamp(40px, 8vw, 80px);line-height:1.1;margin-bottom:24px;">
+                    Ready To <span class="text-grad">Start?</span>
+                </h2>
+                <p style="font-size:18px;color:var(--surface-400);max-width:500px;margin:0 auto 40px;">
+                    Join the community of ambitious individuals building their future.
+                </p>
+                <a class="btn btn-primary anim-grad" href="#" onclick="openPlanModal(event)"
+                    style="padding:16px 40px; font-size:18px;">Join HyperUniversity →</a>
+            </div>
+        </section>
+
+        <!-- Plan Modal -->
+        <div class="modal-overlay" id="plan-modal" onclick="closePlanModal(event)">
+            <div class="plan-modal" onclick="event.stopPropagation()">
+                <button class="modal-close" onclick="closePlanModal(event)">
+                    <span class="material-symbols-outlined mi" style="font-size:18px;">close</span>
+                </button>
+                <div class="label" style="margin-bottom: 16px;"><span class="label-dot"></span> Choose Plan</div>
+                <h3 style="font-size: 28px; margin-bottom: 32px;">Select <span class="text-grad">Membership</span></h3>
+
+                <div class="grid-2" style="margin: 0;">
+                    <!-- Standard -->
+                    <div class="price-card">
+                        <h3 style="font-size:24px;margin-bottom:8px;">Standard</h3>
+                        <div style="margin-bottom:24px;">
+                            <span style="font-family:'Anton',sans-serif;font-size:36px;color:var(--white);">₹349</span>
+                            <span style="font-size:14px;color:var(--surface-400);">/month</span>
+                        </div>
+                        <ul
+                            style="list-style:none;flex:1;margin-bottom:24px;display:flex;flex-direction:column;gap:8px;font-size:14px;">
+                            <li style="display:flex;align-items:center;gap:10px;"><span
+                                    class="material-symbols-outlined mi"
+                                    style="color:var(--cyan);font-size:16px;">check</span><strong>1 technical
+                                    skill</strong></li>
+                            <li style="display:flex;align-items:center;gap:10px;"><span
+                                    class="material-symbols-outlined mi"
+                                    style="color:var(--cyan);font-size:16px;">check</span><strong>Personality
+                                    Dev</strong></li>
+                        </ul>
+                        <a class="btn btn-ghost" href="#" onclick="selectPlan(event, 'Standard')"
+                            style="width:100%;">Select</a>
+                    </div>
+                    <!-- Premium -->
+                    <div class="price-card featured" style="padding: 24px;">
+                        <div class="label featured-tag"
+                            style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--cyan);color:var(--bg);border:none;font-weight:700;">
+                            Recommended</div>
+                        <h3 style="font-size:24px;margin-bottom:8px;">Premium</h3>
+                        <div style="margin-bottom:24px;">
+                            <span style="font-family:'Anton',sans-serif;font-size:36px;color:var(--white);">₹499</span>
+                            <span style="font-size:14px;color:var(--surface-400);">/month</span>
+                        </div>
+                        <ul
+                            style="list-style:none;flex:1;margin-bottom:24px;display:flex;flex-direction:column;gap:8px;font-size:14px;">
+                            <li style="display:flex;align-items:center;gap:10px;"><span
+                                    class="material-symbols-outlined mi"
+                                    style="color:var(--cyan);font-size:16px;">check</span><strong>2 technical
+                                    skills</strong></li>
+                            <li style="display:flex;align-items:center;gap:10px;"><span
+                                    class="material-symbols-outlined mi"
+                                    style="color:var(--cyan);font-size:16px;">check</span><strong>Personality
+                                    Dev</strong></li>
+                        </ul>
+                        <a class="btn btn-primary anim-grad" href="#" onclick="selectPlan(event, 'Premium')"
+                            style="width:100%;">Select</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page Modal -->
+        <div class="modal-overlay" id="page-modal" onclick="closePageModal(event)">
+            <div class="payment-modal" onclick="event.stopPropagation()"
+                style="max-width: 600px; max-height: 85vh; overflow-y: auto;">
+                <button class="modal-close" onclick="closePageModal(event)">
+                    <span class="material-symbols-outlined mi" style="font-size:18px;">close</span>
+                </button>
+                <div class="label" style="margin-bottom: 16px;"><span class="label-dot"></span> <span
+                        id="page-modal-label">Information</span></div>
+                <h3 id="page-modal-title" style="font-size: 28px; margin-bottom: 24px;">Page Title</h3>
+                <div id="page-modal-content" style="color: var(--surface-400); font-size: 15px; line-height: 1.6;">
+                    <p style="margin-bottom: 16px;">This page is currently being updated. Please check back later for
+                        the full information regarding this topic.</p>
+                    <p>If you have any urgent inquiries, please reach out to our support team directly.</p>
+                </div>
+                <a class="btn btn-ghost" href="#" onclick="closePageModal(event)" style="margin-top: 24px;">Close</a>
+            </div>
+        </div>
+
+        <!-- Payment Modal -->
+        <div class="modal-overlay" id="payment-modal" onclick="closePaymentModal(event)">
+            <div class="payment-modal" onclick="event.stopPropagation()">
+                <button class="modal-close" onclick="closePaymentModal(event)">
+                    <span class="material-symbols-outlined mi" style="font-size:18px;">close</span>
+                </button>
+                <div class="label" style="margin-bottom: 16px;"><span class="label-dot"></span> Secure Checkout</div>
+                <h3 style="font-size: 28px; margin-bottom: 8px;">Select Payment <span class="text-grad">Method</span>
+                </h3>
+                <p style="color: var(--surface-400); font-size: 14px; margin-bottom: 32px;">Choose your preferred way to
+                    securely complete your enrollment.</p>
+
+                <div class="pay-option">
+                    <div class="pay-icon"><span class="material-symbols-outlined mi">credit_card</span></div>
+                    <div>
+                        <h4
+                            style="font-size: 18px; margin-bottom: 4px; font-family: 'Inter', sans-serif; text-transform: none;">
+                            Credit / Debit Card</h4>
+                        <p style="font-size: 13px; color: var(--surface-400);">Powered by Stripe</p>
+                    </div>
+                </div>
+
+                <div class="pay-option">
+                    <div class="pay-icon" style="color: var(--brand);"><span
+                            class="material-symbols-outlined mi">account_balance_wallet</span></div>
+                    <div>
+                        <h4
+                            style="font-size: 18px; margin-bottom: 4px; font-family: 'Inter', sans-serif; text-transform: none;">
+                            UPI & Wallets</h4>
+                        <p style="font-size: 13px; color: var(--surface-400);">Google Pay, PhonePe, Paytm</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer
+        style="background:var(--bg); border-top:1px solid rgba(212, 175, 55, 0.2); padding: 80px 0 0; margin-top: 60px; overflow: hidden; position: relative;">
+        <!-- Top Links Zone -->
+        <div class="container" style="margin-bottom: 60px;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 40px;">
+
+                <!-- Col 1: Platform -->
+                <div>
+                    <h4
+                        style="font-family:'Space Mono',monospace;font-size:14px;color:var(--white);margin-bottom:20px;text-transform:uppercase;">
+                        Platform</h4>
+                    <ul style="list-style:none;display:flex;flex-direction:column;gap:12px;">
+                        <li><a href="#" onclick="openPageModal(event, 'Skill Tracks')"
+                                style="color:var(--surface-400);font-size:14px;transition:color 0.2s;"
+                                onmouseover="this.style.color='var(--cyan)'"
+                                onmouseout="this.style.color='var(--surface-400)'">Skill Tracks</a></li>
+                        <li><a href="#" onclick="openPageModal(event, 'Wall of Love')"
+                                style="color:var(--surface-400);font-size:14px;transition:color 0.2s;"
+                                onmouseover="this.style.color='var(--cyan)'"
+                                onmouseout="this.style.color='var(--surface-400)'">Wall of Love</a></li>
+                        <li><a href="#" onclick="openPageModal(event, 'Pricing & Tiers')"
+                                style="color:var(--surface-400);font-size:14px;transition:color 0.2s;"
+                                onmouseover="this.style.color='var(--cyan)'"
+                                onmouseout="this.style.color='var(--surface-400)'">Pricing & Tiers</a></li>
+                        <li><a href="#" onclick="openPageModal(event, 'Student Login')"
+                                style="color:var(--surface-400);font-size:14px;transition:color 0.2s;"
+                                onmouseover="this.style.color='var(--cyan)'"
+                                onmouseout="this.style.color='var(--surface-400)'">Member Login</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 2: Legal -->
+                <div>
+                    <h4
+                        style="font-family:'Space Mono',monospace;font-size:14px;color:var(--white);margin-bottom:20px;text-transform:uppercase;">
+                        Legal</h4>
+                    <ul style="list-style:none;display:flex;flex-direction:column;gap:12px;">
+                        <li><a href="#" onclick="openPageModal(event, 'Terms of Service')"
+                                style="color:var(--surface-400);font-size:14px;transition:color 0.2s;"
+                                onmouseover="this.style.color='var(--cyan)'"
+                                onmouseout="this.style.color='var(--surface-400)'">Terms of Excellence</a></li>
+                        <li><a href="#" onclick="openPageModal(event, 'Privacy Policy')"
+                                style="color:var(--surface-400);font-size:14px;transition:color 0.2s;"
+                                onmouseover="this.style.color='var(--cyan)'"
+                                onmouseout="this.style.color='var(--surface-400)'">Privacy Protocol</a></li>
+                        <li><a href="#" onclick="openPageModal(event, 'Refund Policy')"
+                                style="color:var(--surface-400);font-size:14px;transition:color 0.2s;"
+                                onmouseover="this.style.color='var(--cyan)'"
+                                onmouseout="this.style.color='var(--surface-400)'">Refund Policy</a></li>
+                        <li><a href="#" onclick="openPageModal(event, 'Cookie Policy')"
+                                style="color:var(--surface-400);font-size:14px;transition:color 0.2s;"
+                                onmouseover="this.style.color='var(--cyan)'"
+                                onmouseout="this.style.color='var(--surface-400)'">Cookie Settings</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Support -->
+                <div>
+                    <h4
+                        style="font-family:'Space Mono',monospace;font-size:14px;color:var(--white);margin-bottom:20px;text-transform:uppercase;">
+                        Support</h4>
+                    <ul style="list-style:none;display:flex;flex-direction:column;gap:12px;">
+                        <li><a href="#" onclick="openPageModal(event, 'Contact Support')"
+                                style="color:var(--surface-400);font-size:14px;transition:color 0.2s;"
+                                onmouseover="this.style.color='var(--cyan)'"
+                                onmouseout="this.style.color='var(--surface-400)'">Institutional Support</a></li>
+                        <li><a href="#" style="color:var(--surface-400);font-size:14px;transition:color 0.2s;"
+                                onmouseover="this.style.color='var(--cyan)'"
+                                onmouseout="this.style.color='var(--surface-400)'">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Tissot style feature list with icons -->
+                <div>
+                    <ul style="list-style:none;display:flex;flex-direction:column;gap:16px;">
+                        <li style="display:flex;align-items:center;gap:12px;color:var(--surface-400);font-size:14px;">
+                            <span class="material-symbols-outlined" style="font-size: 20px;">school</span> Expert
+                            Mentors
+                        </li>
+                        <li style="display:flex;align-items:center;gap:12px;color:var(--surface-400);font-size:14px;">
+                            <span class="material-symbols-outlined"
+                                style="font-size: 20px; color: var(--cyan);">add_circle</span> Global Network
+                        </li>
+                        <li style="display:flex;align-items:center;gap:12px;color:var(--surface-400);font-size:14px;">
+                            <span class="material-symbols-outlined" style="font-size: 20px;">lock</span> Secure Payments
+                        </li>
+
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Middle Zone: Location, Socials, Copyright -->
+        <div class="container"
+            style="border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 32px; margin-bottom: 24px;">
+            <div
+                style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px;">
+                <div style="font-size: 14px; color: var(--surface-400);">
+                    🌍 India | <a href="#" style="text-decoration: underline; transition: color 0.2s;"
+                        onmouseover="this.style.color='var(--cyan)'"
+                        onmouseout="this.style.color='var(--surface-400)'">Change region</a>
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--surface-400);">
+                    <span style="font-weight: bold; color: var(--white);">+</span> Follow us on social media
+                </div>
+
+                <div style="font-size: 14px; color: var(--surface-400);">
+                    © 2026 HYPERUNIVERSITY. THE PRIVATE DIGITAL ESTATE FOR THE AMBITIOUS.
+                </div>
+            </div>
+        </div>
+
+        <!-- Massive Brand Text (Tissot style) -->
+        <div style="width: 100%; overflow: hidden; text-align: center; line-height: 0.8; padding-bottom: 24px;">
+            <h1
+                style="font-family: 'Anton', sans-serif; font-size: 16vw; color: var(--white); margin: 0; padding: 0; letter-spacing: -0.02em; white-space: nowrap;">
+                HYPERUNIVERSITY
+            </h1>
+        </div>
+    </footer>
+
+    <script>
+        // Plan Modal
+        function openPlanModal(e) {
+            if (e) e.preventDefault();
+            document.getElementById('plan-modal').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closePlanModal(e) {
+            if (e) e.preventDefault();
+            document.getElementById('plan-modal').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+        function selectPlan(e, plan) {
+            if (e) e.preventDefault();
+            closePlanModal(e);
+            setTimeout(() => {
+                openPaymentModal(e);
+            }, 300);
+        }
+
+        const pageContent = {
+            'Terms of Service': `
+                <p style="margin-bottom: 16px;"><strong>Last Updated:</strong> September 2026</p>
+                <p style="margin-bottom: 24px;">Welcome to Hyper Univ. By accessing or using our website, services, content, or other offerings, you agree to these Terms of Service.</p>
+                <h4 style="color: var(--white); font-size: 16px; margin-bottom: 8px;">Use of Our Services</h4>
+                <p style="margin-bottom: 20px;">You agree to use Hyper Univ's website and services responsibly and only for lawful purposes. You should not misuse the website, attempt to gain unauthorized access, interfere with its operation, or use its content in a way that violates applicable laws.</p>
+                <h4 style="color: var(--white); font-size: 16px; margin-bottom: 8px;">Content</h4>
+                <p style="margin-bottom: 20px;">The information and educational content available through Hyper Univ are provided for general informational and educational purposes. While we aim to provide useful and accurate information, we do not guarantee that all content will always be complete, current, or error-free.</p>
+                <h4 style="color: var(--white); font-size: 16px; margin-bottom: 8px;">Intellectual Property</h4>
+                <p style="margin-bottom: 20px;">Unless otherwise stated, the content, branding, design, graphics, text, and other materials available on Hyper Univ belong to Hyper Univ or their respective owners. They may not be copied, reproduced, modified, or distributed without appropriate permission.</p>
+                <h4 style="color: var(--white); font-size: 16px; margin-bottom: 8px;">Third-Party Services</h4>
+                <p style="margin-bottom: 20px;">Hyper Univ may contain links or references to third-party websites, tools, or services. We are not responsible for the content, availability, or practices of third-party services.</p>
+                <h4 style="color: var(--white); font-size: 16px; margin-bottom: 8px;">Changes to These Terms</h4>
+                <p style="margin-bottom: 20px;">We may update these Terms of Service from time to time. Updated terms will be made available on this page.</p>
+                <h4 style="color: var(--white); font-size: 16px; margin-bottom: 8px;">Contact</h4>
+                <p>If you have questions regarding these Terms of Service, please contact Hyper Univ through the available support channels.</p>
+            `,
+            'Privacy Policy': `
+                <p style="margin-bottom: 16px;"><strong>Last Updated:</strong> September 2026</p>
+                <p style="margin-bottom: 24px;">Hyper Univ respects your privacy and is committed to handling information responsibly.</p>
+                <h4 style="color: var(--white); font-size: 16px; margin-bottom: 8px;">Information We May Collect</h4>
+                <p style="margin-bottom: 16px;">Depending on how you use our website or services, we may collect information such as your name, email address, account information, messages, or other information that you voluntarily provide.</p>
+                <p style="margin-bottom: 20px;">We may also collect basic technical information, such as browser type, device information, and website usage data, to help maintain and improve our services.</p>
+                <h4 style="color: var(--white); font-size: 16px; margin-bottom: 8px;">How We Use Information</h4>
+                <p style="margin-bottom: 8px;">Information may be used to:</p>
+                <ul style="margin-bottom: 20px; padding-left: 20px; display: flex; flex-direction: column; gap: 4px;">
+                    <li>Provide and improve our services</li>
+                    <li>Respond to questions and support requests</li>
+                    <li>Maintain website security</li>
+                    <li>Understand how our website is used</li>
+                    <li>Communicate important updates</li>
+                    <li>Improve the overall user experience</li>
+                </ul>
+                <h4 style="color: var(--white); font-size: 16px; margin-bottom: 8px;">Information Security</h4>
+                <p style="margin-bottom: 20px;">We take reasonable measures to protect information from unauthorized access, alteration, disclosure, or misuse. However, no internet-based service can guarantee complete security.</p>
+                <h4 style="color: var(--white); font-size: 16px; margin-bottom: 8px;">Third-Party Services</h4>
+                <p style="margin-bottom: 20px;">Our website may use third-party services or contain links to external websites. Their privacy practices may differ from ours, and we encourage you to review their respective privacy policies.</p>
+                <h4 style="color: var(--white); font-size: 16px; margin-bottom: 8px;">Changes to This Policy</h4>
+                <p style="margin-bottom: 20px;">This Privacy Policy may be updated periodically. Any changes will be reflected on this page.</p>
+                <h4 style="color: var(--white); font-size: 16px; margin-bottom: 8px;">Contact</h4>
+                <p>If you have questions about this Privacy Policy, please contact Hyper Univ through the available support channels.</p>
+            `,
+            'Refund Policy': `
+                <p style="margin-bottom: 16px;"><strong>Last Updated:</strong> September 2026</p>
+                <p style="margin-bottom: 24px;">At Hyper Univ, we aim to provide a clear and reliable experience for our users.</p>
+                <h4 style="color: var(--white); font-size: 16px; margin-bottom: 8px;">Refund Eligibility</h4>
+                <p style="margin-bottom: 20px;">Refund eligibility may depend on the specific product, service, course, subscription, or purchase involved. Any applicable refund terms may be communicated at the time of purchase.</p>
+                <h4 style="color: var(--white); font-size: 16px; margin-bottom: 8px;">Requesting a Refund</h4>
+                <p style="margin-bottom: 20px;">If you believe you are eligible for a refund, you may contact Hyper Univ support with relevant information about your purchase and the reason for your request.</p>
+                <h4 style="color: var(--white); font-size: 16px; margin-bottom: 8px;">Review of Requests</h4>
+                <p style="margin-bottom: 20px;">Refund requests may be reviewed on a case-by-case basis where specific refund terms have not been provided.</p>
+                <h4 style="color: var(--white); font-size: 16px; margin-bottom: 8px;">Processing</h4>
+                <p style="margin-bottom: 20px;">If a refund is approved, the applicable amount will generally be returned through the original payment method, subject to applicable payment-processing timelines.</p>
+                <h4 style="color: var(--white); font-size: 16px; margin-bottom: 8px;">Changes to This Policy</h4>
+                <p style="margin-bottom: 20px;">Hyper Univ may update this Refund Policy when necessary. The latest version will always be made available on this page.</p>
+                <h4 style="color: var(--white); font-size: 16px; margin-bottom: 8px;">Contact</h4>
+                <p>For refund-related questions, please contact Hyper Univ through the available support channels.</p>
+            `,
+            'Cookie Policy': `
+                <p style="margin-bottom: 16px;"><strong>Last Updated:</strong> September 2026</p>
+                <p style="margin-bottom: 24px;">Hyper Univ may use cookies and similar technologies to provide, maintain, and improve its website and services.</p>
+                <h4 style="color: var(--white); font-size: 16px; margin-bottom: 8px;">What Are Cookies?</h4>
+                <p style="margin-bottom: 20px;">Cookies are small files stored on your device when you visit a website. They can help websites remember information about your visit and provide a better user experience.</p>
+                <h4 style="color: var(--white); font-size: 16px; margin-bottom: 8px;">How We May Use Cookies</h4>
+                <p style="margin-bottom: 8px;">Cookies may be used to:</p>
+                <ul style="margin-bottom: 20px; padding-left: 20px; display: flex; flex-direction: column; gap: 4px;">
+                    <li>Keep the website functioning properly</li>
+                    <li>Remember preferences</li>
+                    <li>Understand website usage</li>
+                    <li>Improve website performance</li>
+                    <li>Help maintain security</li>
+                </ul>
+                <h4 style="color: var(--white); font-size: 16px; margin-bottom: 8px;">Managing Cookies</h4>
+                <p style="margin-bottom: 20px;">Most web browsers allow you to manage or disable cookies through their settings. Disabling certain cookies may affect some website functionality.</p>
+                <h4 style="color: var(--white); font-size: 16px; margin-bottom: 8px;">Third-Party Cookies</h4>
+                <p style="margin-bottom: 20px;">Some third-party services used by the website may place their own cookies or similar technologies. Their use of cookies is governed by their respective policies.</p>
+                <h4 style="color: var(--white); font-size: 16px; margin-bottom: 8px;">Changes to This Policy</h4>
+                <p>This Cookie Policy may be updated from time to time. Changes will be reflected on this page.</p>
+            `,
+            'default': `
+                <p style="margin-bottom: 16px;">This page is currently being updated. Please check back later for the full information regarding this topic.</p>
+                <p>If you have any urgent inquiries, please reach out to our support team directly.</p>
+            `
+        };
+
+        // Page Modal
+        function openPageModal(e, title) {
+            if (e) e.preventDefault();
+            document.getElementById('page-modal-title').innerHTML = title;
+            document.getElementById('page-modal-content').innerHTML = pageContent[title] || pageContent['default'];
+            document.getElementById('page-modal').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closePageModal(e) {
+            if (e) e.preventDefault();
+            document.getElementById('page-modal').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        // Payment Modal
+        function openPaymentModal(e) {
+            if (e) e.preventDefault();
+            document.getElementById('payment-modal').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closePaymentModal(e) {
+            if (e) e.preventDefault();
+            document.getElementById('payment-modal').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        // Preloader
+        (function () {
+            const text = 'HYPERUNIVERSITY';
+            const container = document.getElementById('preloader-text');
+            text.split('').forEach((ch, i) => {
+                const span = document.createElement('span');
+                span.textContent = ch;
+                span.style.animationDelay = (i * 0.05) + 's';
+                if (i >= 5) {
+                    span.style.background = 'linear-gradient(135deg, var(--brand-light), var(--cyan))';
+                    span.style.webkitBackgroundClip = 'text';
+                    span.style.webkitTextFillColor = 'transparent';
+                } else {
+                    span.style.color = 'var(--white)';
+                }
+                container.appendChild(span);
+            });
+
+            const counter = document.getElementById('preloader-counter');
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.floor(Math.random() * 10) + 1;
+                if (progress > 100) progress = 100;
+                counter.textContent = progress + '%';
+                if (progress === 100) {
+                    clearInterval(interval);
+                }
+            }, 180);
+        })();
+
+        window.addEventListener('load', () => {
+            const p = document.getElementById('preloader');
+            setTimeout(() => {
+                p.classList.add('hide');
+                setTimeout(() => { p.style.display = 'none'; revealOnScroll(); }, 800);
+            }, 2400);
+        });
+
+        // Scroll reveal
+        const revs = document.querySelectorAll('.reveal');
+        function revealOnScroll() {
+            revs.forEach(el => {
+                if (el.getBoundingClientRect().top < innerHeight - 80) el.classList.add('active');
+            });
+        }
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll();
+
+        // Island nav
+        const island = document.getElementById('island-nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 60) island.classList.add('scrolled');
+            else island.classList.remove('scrolled');
+        });
+
+        // Mobile menu
+        const burger = document.getElementById('burger-btn');
+        const panel = document.getElementById('mobile-panel');
+        let menuOpen = false;
+        burger.addEventListener('click', () => {
+            menuOpen = !menuOpen;
+            panel.classList.toggle('open', menuOpen);
+            burger.querySelector('.material-symbols-outlined').textContent = menuOpen ? 'close' : 'menu';
+        });
+
+        // Video Preloader Logic
+        const videoWrapper = document.getElementById('video-wrapper');
+        const videoPreloader = document.getElementById('video-preloader');
+        const videoProgress = document.getElementById('video-progress');
+        let videoPreloaderTriggered = false;
+
+        const videoObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !videoPreloaderTriggered) {
+                    videoPreloaderTriggered = true;
+                    let p = 0;
+                    const vInt = setInterval(() => {
+                        p += Math.random() * 5 + 2;
+                        if (p >= 100) {
+                            p = 100;
+                            clearInterval(vInt);
+                            setTimeout(() => {
+                                videoPreloader.style.opacity = '0';
+                                videoPreloader.style.visibility = 'hidden';
+                                videoPreloader.style.pointerEvents = 'none';
+                            }, 500);
+                        }
+                        videoProgress.style.width = p + '%';
+                    }, 100);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        if (videoWrapper) {
+            videoObserver.observe(videoWrapper);
+        }
+    </script>
+</body>
+
+</html>
